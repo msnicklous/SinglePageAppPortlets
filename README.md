@@ -34,7 +34,7 @@ available from the
 
 Your completed portal page should look similar to this:
 
-[Single-Page App Page](/portalpage.gif)
+![Single-Page App Page](/portalpage.gif)
 
 ###Usage
 
