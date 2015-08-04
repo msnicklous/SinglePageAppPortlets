@@ -1,0 +1,185 @@
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xmlns:rp="http://www.apache.org/portals/pluto/pub-render-params/ResourcePortlet"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" 
+             version="2.0"
+    		id="ph.single.page.app.portlets">
+   <portlet>
+      <portlet-name>PH-ResourcePortlet-PRP</portlet-name>
+      <display-name>PH Resource Portlet</display-name>
+      
+      <portlet-class>basic.portlet.ResourcePortlet</portlet-class>
+
+      <init-param>
+         <name>wps.multiple.action.execution</name>
+         <value>true</value>
+      </init-param>
+
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>VIEW</portlet-mode>
+      </supports>
+
+      <supported-locale>en</supported-locale>        
+
+      <portlet-info>
+         <title>PH Resource Portlet</title>
+      </portlet-info>
+      
+		<portlet-preferences>
+			<!-- indicate that we depend on the portlet hub -->
+			<preference>
+				<name>capability.3.id</name>
+				<value>portlethub</value>
+				<read-only>true</read-only>
+			</preference>
+			<preference>
+				<name>capability.3.minValue</name>
+				<value>0.1</value>
+				<read-only>true</read-only>
+			</preference>
+		</portlet-preferences>
+
+      <supported-public-render-parameter>imgName</supported-public-render-parameter>
+      <supported-public-render-parameter>color</supported-public-render-parameter>
+   </portlet>
+
+   <portlet>
+      <portlet-name>MessageBoxPortlet</portlet-name>
+      <display-name>Message Box Portlet</display-name>
+      
+      <portlet-class>basic.portlet.MessageBoxPortlet</portlet-class>
+
+      <init-param>
+         <name>wps.multiple.action.execution</name>
+         <value>true</value>
+      </init-param>
+
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>VIEW</portlet-mode>
+      </supports>
+
+      <supported-locale>en</supported-locale>        
+
+      <portlet-info>
+         <title>PH Message Box Portlet</title>
+      </portlet-info>
+
+		<portlet-preferences>
+			<!-- indicate that we depend on the portlet hub -->
+			<preference>
+				<name>capability.3.id</name>
+				<value>portlethub</value>
+				<read-only>true</read-only>
+			</preference>
+			<preference>
+				<name>capability.3.minValue</name>
+				<value>0.1</value>
+				<read-only>true</read-only>
+			</preference>
+		</portlet-preferences>
+
+      <supported-processing-event>
+         <qname>rp:Message</qname>
+      </supported-processing-event>
+
+      <supported-public-render-parameter>color</supported-public-render-parameter>
+   </portlet>
+
+   <portlet>
+      <portlet-name>ImageSelPortlet</portlet-name>
+      <display-name>Image Selection Portlet</display-name>
+      
+      <portlet-class>basic.portlet.ImageSelPortlet</portlet-class>
+
+      <init-param>
+         <name>wps.multiple.action.execution</name>
+         <value>true</value>
+      </init-param>
+
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>VIEW</portlet-mode>
+      </supports>
+
+      <supported-locale>en</supported-locale>        
+
+      <portlet-info>
+         <title>PH Image Selection Portlet</title>
+      </portlet-info>
+
+		<portlet-preferences>
+			<!-- indicate that we depend on the portlet hub -->
+			<preference>
+				<name>capability.3.id</name>
+				<value>portlethub</value>
+				<read-only>true</read-only>
+			</preference>
+			<preference>
+				<name>capability.3.minValue</name>
+				<value>0.1</value>
+				<read-only>true</read-only>
+			</preference>
+		</portlet-preferences>
+
+      <supported-public-render-parameter>imgName</supported-public-render-parameter>
+   </portlet>
+
+   <portlet>
+      <portlet-name>PH-ColorSelPortlet</portlet-name>
+      <display-name>PH Color Selection Portlet</display-name>
+      
+      <portlet-class>basic.portlet.ColorSelPortlet</portlet-class>
+
+      <init-param>
+         <name>wps.multiple.action.execution</name>
+         <value>true</value>
+      </init-param>
+
+      <supports>
+         <mime-type>text/html</mime-type>
+         <portlet-mode>VIEW</portlet-mode>
+         <portlet-mode>HELP</portlet-mode>
+      </supports>
+
+      <supported-locale>en</supported-locale>        
+
+      <portlet-info>
+         <title>PH Color Selection Portlet</title>
+      </portlet-info>
+
+		<portlet-preferences>
+			<!-- indicate that we depend on the portlet hub -->
+			<preference>
+				<name>capability.3.id</name>
+				<value>portlethub</value>
+				<read-only>true</read-only>
+			</preference>
+			<preference>
+				<name>capability.3.minValue</name>
+				<value>0.1</value>
+				<read-only>true</read-only>
+			</preference>
+		</portlet-preferences>
+
+      <supported-publishing-event>
+         <qname>rp:Message</qname>
+      </supported-publishing-event>
+      <supported-public-render-parameter>color</supported-public-render-parameter>
+   </portlet>
+   
+   <event-definition>
+      <qname>rp:Message</qname>
+      <value-type>java.lang.String</value-type>
+   </event-definition>
+   
+   <public-render-parameter>
+      <identifier>imgName</identifier>
+      <qname>rp:ph-imgName</qname>
+   </public-render-parameter>
+   <public-render-parameter>
+      <identifier>color</identifier>
+      <qname>rp:ph-color</qname>
+   </public-render-parameter>
+ </portlet-app>
