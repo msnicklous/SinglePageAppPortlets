@@ -128,6 +128,9 @@ The portlet client for each of the sample portlets has a similar structure.
 We will examine this structure in more detail taking the PH Image Selection Portlet, view-isp.jsp, as an example.
 
 Portlet client execution begins when the portlet client registers itself with the portlet hub.
+The portlet client calls the wpModules.portlethub.register(pid) method, passing its portlet ID
+(the portlet namespace) as a parameter.
+Each portlet client must register using its own specific portlet ID.
 
 ```JavaScript
 // Register with Portlet Hub, add listener for onStateChange event
@@ -138,6 +141,88 @@ wpModules.portlethub.register(pid).then(function (pi) {
    hub.addEventListener("portlet.onStateChange", update);
 });
 ```
+The portlet hub returns a Promise, which is fulfilled with a portlet hub object 
+(the argument 'pi' and variable 'hub' in the example above) that has as its properties functions and 
+constants that the portlet client can use to interact with the portlet hub.
+It should be noted that the hub object is specific for the registered portlet, and
+should not be passed to other portlets.
+
+The main thing that the portlet client should do when the promise is fulfilled is register
+an event listener for the onStateChange event.
+The portlet hub will call the registered listener function immediately after the listener is registered,
+and thereafter whenever the portlet state changes.
+In this case, the portlet client uses the 'hub.addEventListener' function to register a function named
+'update' as the listener function.
+
+The 'hub.newState()' method creates a new empty PortletState object. 
+The PortletState object provides access to the portlet mode, window state, and to the private and
+public render parameters.
+
+When the portlet state for a registered portlet changes, the portlet hub calls the 
+registered listener function.
+```JavaScript
+   // Handler for onStateChange event
+   update = function (type, state) {
+      ...
+   },
+```
+The portlet hub calls the listener function with two arguments.
+The first is a string designating the event type ("portlet.onStateChange") and the second
+is a PortletState object containing the current portlet mode, window state, and private and public render 
+parameters.
+```JavaScript
+   ...
+          newImg = state.getValue('imgName');
+   ...
+```
+The PortletState#getValue() function provides access to the render parameter
+specified by the argument.
+```JavaScript
+   ...
+         hub.createResourceUrl({}).then(function (url) {
+   ...
+            xhr.open("GET",url,true);
+   ...
+```
+The portlet client can use the portlet hub 'createResourceUrl' method to obtain
+a resource URL containing the current page state. 
+The 'createResourceUrl' method can be called with optional resource parameters and
+cacheability options (see documentation; see the PH Resource Portlet for an example).
+In the example, the method is called with an empty resource parameters object, meaning
+that no additional resource parameters are set. 
+
+The 'createResourceUrl' method returns a Promise which is fulfilled with a string
+representing the URL. 
+The portlet client can use the resource URL directly in an XHR request, or with 
+a library such as Angular JS or JQuery to retrieve the resource.
+
+The portlet client can use portlet hub functions to set a new portlet state.
+The example below shows the handler for the image selection type control.
+```JavaScript
+// set private parameter selType to store the selection display type
+handleST = function () {
+   console.log("ISP: select display type clicked: " + this.value);
+   if (currState.parameters.selType !==  this.value) {
+      var newState = currState.clone();
+      newState.setValue('selType', this.value);
+      hub.setPortletState(newState);
+   }
+};
+```
+If the image selection type changes, the portlet client uses the 'PortletState#clone'
+method to clone the current portlet state (a good practice so that the current state 
+is not lost if anything goes wrong). 
+It then sets the 'selType' render parameter on the 'newState' object using the 
+'PortletState#setValue' method.
+Both private and public render parameters can be set in this manner.
+The portlet client uses the portlet hub 'setPortletState' method to inform the portlet 
+hub of the state change.
+
+Note that the portlet client does not directly perform any UI updates at this point.
+When the portlet hub accepts and processes the requested state change, it will call the registered
+'onStateChage' listener to inform the portlet client of the new state. 
+The portlet client performs UI updates corresponding to the new state in the registered
+listener method.
 
 ###Portlet Hub Documentation
 
