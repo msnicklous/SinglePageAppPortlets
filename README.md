@@ -142,7 +142,8 @@ wpModules.portlethub.register(pid).then(function (pi) {
 });
 ```
 The portlet hub returns a Promise, which is fulfilled with a portlet hub object 
-(the argument 'pi' and variable 'hub' in the example above) that has as its properties functions and 
+(the argument 'pi' and variable 'hub' in the example above). 
+The portlet hub object has as its properties functions and 
 constants that the portlet client can use to interact with the portlet hub.
 It should be noted that the hub object is specific for the registered portlet, and
 should not be passed to other portlets.
@@ -151,7 +152,7 @@ The main thing that the portlet client should do when the promise is fulfilled i
 an event listener for the onStateChange event.
 The portlet hub will call the registered listener function immediately after the listener is registered,
 and thereafter whenever the portlet state changes.
-In this case, the portlet client uses the 'hub.addEventListener' function to register a function named
+Viewing the example code, the portlet client uses the 'hub.addEventListener' function to register a function named
 'update' as the listener function.
 
 The 'hub.newState()' method creates a new empty PortletState object. 
