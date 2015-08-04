@@ -63,14 +63,14 @@ If you select an image, the portlet sets a public render parameter indicating th
 
 The upper portion of the portlet contains an enty field that alllows you to enter a 
 color value in CSS hexidecimal format, for example '#FFA' or '#CAFEBA'. The portlet
-JavaScript code uses the portlet hub API to set a public render parameter contollig the background color
+JavaScript code uses the portlet hub API to set a public render parameter contolling the background color
 of items in the PH Resource Portlet and the PH Message Box Portlet.
 
 The lower portion of the portlet contains a form with some controls and an entry field.
 Text entered into the entry field is sent as a message to the PH Message Box Portlet.
 The checkbox controls select the foreground color for the message text.
 The state of the controls is maintained through use of private render parameters that are 
-set by the portelt JaaScript code.
+set by the portlet JavaScript code.
 
 ####The PH Resource Portlet
 
@@ -121,8 +121,23 @@ back / forward buttons.
 
 Each of the sample portlets consists of a Java class that extends GenericPortlet 
 to handle the server-side requests along with a JSP that renders the portlet markup.
+This is standard JSR 286 portlet code, so it will not be described in more detail. 
 
-The portlet client-side JavaScript code is provided through the JSP.
+The portlet client-side JavaScript code (known as the 'portlet client' in JSR 362 parlance) is provided through the JSP.
+The portlet client for each of the sample portlets has a similar structure. 
+We will examine this structure in more detail taking the PH Image Selection Portlet, view-isp.jsp, as an example.
+
+Portlet client execution begins when the portlet client registers itself with the portlet hub.
+
+```JavaScript
+// Register with Portlet Hub, add listener for onStateChange event
+wpModules.portlethub.register(pid).then(function (pi) {
+   console.log("ISP Image Selection Portlet: registered: " + pid);
+   hub = pi;
+   currState = hub.newState();
+   hub.addEventListener("portlet.onStateChange", update);
+});
+```
 
 ###Portlet Hub Documentation
 
