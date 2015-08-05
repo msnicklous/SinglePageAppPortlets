@@ -221,7 +221,7 @@ hub of the state change.
 
 Note that the portlet client does not directly perform any UI updates at this point.
 When the portlet hub accepts and processes the requested state change, it will call the registered
-'onStateChage' listener to inform the portlet client of the new state. 
+'onStateChange' listener to inform the portlet client of the new state. 
 The portlet client performs UI updates corresponding to the new state in the registered
 listener method.
 
@@ -242,6 +242,13 @@ If you see  a string similar to "wp.portalsamples.modules.PortletHub, v0.1, 2015
 the theme module is installed correctly.
 
 If you do not see the version string, check the theme module installation. 
+
+If you believe the theme module is installed properly, but the page still does not display correctly, try
+invalidating the cache using the WebSphere Portal administrative functions.
+
+```
+Portal Analysis > Theme Analyzer > Utilities > Control Center > Invalidate Cache 
+```
 
 ###Support
 
