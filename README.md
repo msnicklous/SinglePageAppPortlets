@@ -188,8 +188,8 @@ specified by the argument.
 The portlet client can use the portlet hub 'createResourceUrl' method to obtain
 a resource URL containing the current page state. 
 The 'createResourceUrl' method can be called with optional resource parameters and
-cacheability options (see documentation; see the PH Resource Portlet for an example).
-In the example, the method is called with an empty resource parameters object, meaning
+cacheability options (see documentation; see the PH Resource Portlet for an example using resource parameters and the cacheability option).
+In the above example, the method is called with an empty resource parameters object, meaning
 that no additional resource parameters are set. 
 
 The 'createResourceUrl' method returns a Promise which is fulfilled with a string
